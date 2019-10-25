@@ -1,11 +1,14 @@
 ### Common Issues ###
-* <strong>Users dont know where their enode is located: You can know your enode by following these steps:</strong>
+This section is intended to help you solve common issues that appears during installation process:
+<p>
+
+* <strong>Issue: Users dont know where their enode is located: You can know your enode by following these steps:</strong>
     * Enter to your remote machine
     * sudo -i
     * key=$(pantheon --data-path=/root/lacchain/data public-key export-address --to=/root/lacchain/data/nodeAddress | grep -oE "0x[A-Fa-f0-9]*" | sed 's/0x//');ip=$(dig +short myip.opendns.com @resolver1.opendns.com 2>/dev/null || curl -s --retry 2 icanhazip.com);port=60606; echo "enode://${key}@${ip}:${port}" > /root/lacchain/data/enode
     * cat /root/lacchain/data/enode
 
-* <strong>Users do not see their node on http://ethstats.lacchain.io/ , this issue can be solved by checking if docker service is running:</strong>
+* <strong>Issue: Users do not see their node on http://ethstats.lacchain.io/ , this issue can be solved by checking if docker service is running:</strong>
     * Enter to the remote VM => ssh
     * Enter as root => sudo -i
     * Check if docker related with ehtsats is running: 
@@ -27,7 +30,7 @@
     $ docker ps
     ```
 
-* <strong>Error when installing oracle java jdk</strong>
+* <strong>Issue: Error when installing oracle java jdk</strong>
     * This issue happens when ansible tries to install java on the remote VM, this issue is associated to the version of java required by the operating system. By default we have linked to download jdk-11.0.4 but sometimes machine requires an upper version like jdk-11.0.5; if this is the problem then the ansible will fall in the task: "ensure java is installed". To solve this issue you can execute the following steps:
         * Download the required java version from oracle: https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html
         * Copy the downloaded installer via scp => for example:
